@@ -1,0 +1,32 @@
+compiler: clang 21.0.0 (clang-2100.3.34.2)
+vector<int> size N = 100000000   vector<string> size M = 1000000
+
+== std::find on vector<int> ==
+  find(7), 7 at index N/2:
+    rep 1:   16101.00 us   (pos=50000000, expected N/2)
+    rep 2:   15973.62 us
+    rep 3:   16158.38 us
+  find(7), no element is 7:
+    rep 1:   32436.21 us   (pos=-1, expected npos)
+    rep 2:   32215.29 us
+    rep 3:   34063.79 us
+== std::find_if on vector<int> ==
+  find_if(x<7), 3 at index N/2:
+    rep 1:   18792.67 us   (pos=50000000, expected N/2)
+    rep 2:   17412.29 us
+    rep 3:   16503.83 us
+  find_if(x<7), all elements >= 7:
+    rep 1:   33321.25 us   (pos=-1, expected npos)
+    rep 2:   33524.04 us
+    rep 3:   33994.46 us
+== std::find on vector<string> (generation not timed) ==
+  find(20 x X), not present:
+    rep 1:    2531.92 us   (pos=-1, expected npos)
+    rep 2:    2006.75 us
+    rep 3:    1881.92 us
+  find(20 x X), target at index M/2:
+    rep 1:    1076.58 us   (pos=500000, expected M/2)
+    rep 2:    1034.17 us
+    rep 3:     972.96 us
+
+(sink=18446744073709051615) -- all search results folded into this sink
